@@ -1,32 +1,22 @@
-<ion-app>
-  <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar color="secondary">
-        <ion-title>Menu Content</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">This is the menu content.</ion-content>
-  </ion-menu>
-  <div class="ion-page" id="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Hola, Usuario!</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <ion-item >
-        <ion-card >
-          <ion-card-header>Nueva Build</ion-card-header>
-        </ion-card>
-      </ion-item>
-      <ion-item>
-        <ion-card >
-          <ion-card-header>Mis Builds</ion-card-header>
-        </ion-card>
-      </ion-item>
-    </ion-content>
-  </div>
-</ion-app>
+<div class="ion-page" id="main-content">
+  <ion-header class="headerSection">
+    <ion-toolbar class="bar">
+      <div class="backArrow">
+        <ion-img src="../../../assets/img/arrow-back-circle-outline.svg"></ion-img>
+      </div>
+      <ion-title>Hola, Usuario!</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item>
+      <ion-card>
+        <ion-card-header>Nueva Build</ion-card-header>
+      </ion-card>
+    </ion-item>
+    <ion-item>
+      <ion-card>
+        <ion-card-header>Mis Builds</ion-card-header>
+      </ion-card>
+    </ion-item>
+  </ion-content>
+</div>

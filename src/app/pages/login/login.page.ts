@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonInput, IonButton, IonItemGroup } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonInput, IonButton, IonItemGroup, IonImg, IonLabel } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-login',
@@ -15,17 +15,14 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, Io
     IonTitle, 
     IonToolbar, 
     CommonModule, 
-    FormsModule, 
-    IonCard, 
-    IonCardHeader, 
-    IonCardTitle, 
-    IonCardContent, 
+    FormsModule,  
     IonItem, 
-    IonLabel,
     IonInput,
     IonButton,
     IonItemGroup,
-    RouterLink
+    RouterLink,
+    IonImg,
+    IonLabel
   ]
 })
 export class LoginPage implements OnInit {

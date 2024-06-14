@@ -1,21 +1,24 @@
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Ingresa tus datos</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item-group>
-        <ion-item color="darkblue">
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="email"></ion-input>
-        </ion-item>
-        <ion-item color="darkblue">
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-      </ion-item-group>
-      <ion-button class="botonesLogin" color="rgb(208, 106, 16)" [routerLink]="['/home']">Ingresar</ion-button>
-      <ion-button class="botonesLogin" [routerLink]="['/register']">Registrarse</ion-button>
-    </ion-card-content>
-  </ion-card>
+  <div class="logoSpace">
+    <ion-img src="../../../assets/img/logo.png"></ion-img>
+  </div>
+  <ion-item-group class="loginInput">
+    <ion-item class="inputTop">
+      <ion-input label="Email" label-placement="floating" fill="solid" class="inputField"></ion-input>
+    </ion-item>
+    <ion-item class="inputBot">
+      <ion-input label="Contraseña" label-placement="floating" fill="solid" class="inputField"></ion-input>
+    </ion-item>
+  </ion-item-group>
+  <div class="buttonGroup">
+    <ion-button
+      class="botonesLogin"
+      color="rgb(208, 106, 16)"
+      [routerLink]="['/home']"
+      >Ingresar</ion-button
+    >
+    <ion-button class="botonesLogin" [routerLink]="['/register']"
+      >Registrarse</ion-button
+    >
+  </div>
 </ion-content>
