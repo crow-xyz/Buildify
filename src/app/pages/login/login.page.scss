@@ -5,6 +5,7 @@ ion-content {
 ion-card {
     margin-top: 50%;
     background-color: darkblue;
+;
 }
 
 ion-card-content {
@@ -19,10 +20,10 @@ ion-item {
 ion-button {
     margin-top: 20px;
     background: rgb(208, 106, 16);
+    border-radius: 5px;
 }
 
 .botonesLogin {
-    
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonItem, IonLabel, IonInput, IonButton, IonItemGroup } from '@ionic/angular/standalone';
 
 @Component({
@@ -23,7 +24,8 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, Io
     IonLabel,
     IonInput,
     IonButton,
-    IonItemGroup
+    IonItemGroup,
+    RouterLink
   ]
 })
 export class LoginPage implements OnInit {
@@ -33,6 +35,8 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-
+  onClick() {
+    console.log('Button Clicked');
+  }
 
 }
