@@ -10,4 +10,9 @@
       <ion-title size="large">main</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div *ngIf="data">
+    <ion-select interface="popover">
+      <ion-select-option *ngFor="let item of data">{{ item.model }}</ion-select-option>
+    </ion-select>
+  </div>
 </ion-content>
