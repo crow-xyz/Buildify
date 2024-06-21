@@ -1,15 +1,6 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>main</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">main</ion-title>
-    </ion-toolbar>
-  </ion-header>
   <div *ngIf="cpuData">
     <ion-select interface="popover">
       <ion-select-option *ngFor="let item of cpuData">{{ item.model }}</ion-select-option>
