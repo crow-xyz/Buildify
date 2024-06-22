@@ -10,9 +10,16 @@
       <ion-title size="large">main</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-label>Selecciona una CPU</ion-label>
   <div *ngIf="cpuData">
-    <ion-select interface="popover">
-      <ion-select-option *ngFor="let item of cpuData">{{ item.model }}</ion-select-option>
+    <ion-select interface="popover" (ionChange)="onCpuSelect($event)">
+      <ion-select-option *ngFor="let item of cpuData" [value]="item">{{ item.brand +" "+ item.model }}</ion-select-option>
     </ion-select>
   </div>
+  <div *ngIf="motherboardData">
+    <ion-select interface="popover" (ionChange)="onMotherboardSelect($event)">
+      <ion-select-option *ngFor="let item of filteredMotherboardData" [value]="item">{{ item.brand +" "+ item.model }}</ion-select-option>
+    </ion-select>
+  </div>
+  <ion-label *ngIf="!isCompatible" color="danger">CPU and Motherboard are not compatible.</ion-label>
 </ion-content>
