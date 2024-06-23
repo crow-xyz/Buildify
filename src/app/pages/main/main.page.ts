@@ -24,8 +24,12 @@ export class MainPage implements OnInit {
   caseData: any[];
   coolerData: any[];
   selectedCpuSocket: string = '';
+  selectedRam: any;
+  selectedCase: any;
   filteredMotherboardData: any[] = [];
+  filteredRamData: any[] = [];
   isCompatible: boolean = true;
+  filteredCaseData: any[];
 
   constructor(private hardwareService: HardwareService) { }
 
@@ -52,7 +56,11 @@ export class MainPage implements OnInit {
         model: new FormControl(null, { validators: [Validators.required] }),
         socket: new FormControl(null, { validators: [Validators.required] })
       }),
-
+      case: new FormGroup({
+        brand: new FormControl(null, { validators: [Validators.required] }),
+        model: new FormControl(null, { validators: [Validators.required] }),
+        maxGpuLength: new FormControl(null, { validators: [Validators.required] }) // Assuming 'maxGpuLength' is a relevant property for cases
+      }),
     });
     // this.form.valueChanges.subscribe(values => {
     //   this.checkCompatibility(values);
@@ -85,6 +93,41 @@ export class MainPage implements OnInit {
     this.hardwareService.getCpuData().subscribe(data => this.cpuData = data);
     this.hardwareService.getGpuData().subscribe(data => this.gpuData = data);
     this.hardwareService.getMotherboardData().subscribe(data => this.motherboardData = data);
+    this.hardwareService.getRamData().subscribe(data => this.ramData = data);
+    this.hardwareService.getCaseData().subscribe(data => this.caseData = data);
+  }
+
+  filterHardware(hardwareType: string, selectedValue: any) {
+    switch (hardwareType) {
+      case 'cpu':
+        this.selectedCpuSocket = selectedValue.socket;
+        this.filteredMotherboardData = this.motherboardData.filter(motherboard => motherboard.socket === this.selectedCpuSocket);
+        break;
+      case 'motherboard':
+        this.form.get('motherboard').setValue({
+          brand: selectedValue.brand,
+          model: selectedValue.model,
+          socket: selectedValue.socket
+        });
+        if (this.ramData && this.ramData.length > 0) {
+          this.filteredRamData = this.ramData.filter(ram => ram.type === selectedValue.ram_type);
+        } else {
+          console.error('RAM data is not loaded yet');
+        }
+        break;
+      case 'gpu':
+        this.form.get('gpu').setValue({
+          brand: selectedValue.brand,
+          model: selectedValue.model,
+          length: selectedValue.length
+        });
+        // Filter cases based on GPU length
+        this.filteredCaseData = this.caseData.filter(caseItem => caseItem.maxGpuLength >= selectedValue.length);
+        break;
+      // Add cases for other hardware types as needed
+      default:
+        console.warn(`No filter logic defined for hardware type: ${hardwareType}`);
+    }
   }
 
   // Metodos para extraer datos de hardware seleccionado
@@ -97,26 +140,36 @@ export class MainPage implements OnInit {
       socket: selectedCpu.socket
     });
     this.selectedCpuSocket = selectedCpu.socket;
-    this.filterMotherboards();
+    // this.filterMotherboards();
+    this.filterHardware('cpu', selectedCpu);
   }
 
   // Filtra las motherboards por socket de CPU seleccionado
-  filterMotherboards() {
-    this.filteredMotherboardData = this.motherboardData.filter(motherboard => motherboard.socket === this.selectedCpuSocket);
-  }
+  // filterMotherboards() {
+  //   this.filteredMotherboardData = this.motherboardData.filter(motherboard => motherboard.socket === this.selectedCpuSocket);
+  // }
 
   onMotherboardSelect(event: any) {
     const selectedMotherboard = event.detail.value;
-
-    this.form.get('motherboard').setValue({
-      brand: selectedMotherboard.brand,
-      model: selectedMotherboard.model,
-      socket: selectedMotherboard.socket
-    });
+    this.filterHardware('motherboard', selectedMotherboard);
   }
 
   onRamSelect(event: any) {
     this.form.get('ram').setValue(event.detail.value);
+  }
+
+  onGpuSelect(event: any) {
+    const selectedGpu = event.detail.value;
+    this.filterHardware('gpu', selectedGpu);
+  }
+  
+  onCaseSelect(event: any) {
+    const selectedCase = event.detail.value;
+    this.form.get('case').setValue({
+      brand: selectedCase.brand,
+      model: selectedCase.model,
+      maxGpuLength: selectedCase.maxGpuLength
+    });
   }
 
   onStorageSelect(event: any) {
