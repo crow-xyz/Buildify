@@ -1,17 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonMenu, IonList, IonItem, IonImg, IonButtons, IonMenuButton } from '@ionic/angular/standalone';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HardwareService } from '../../services/hardware.service';
-
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonSelect, IonSelectOption, IonLabel],
+  imports: [
+    IonContent, 
+    IonHeader, 
+    IonTitle, 
+    IonToolbar, 
+    CommonModule, 
+    FormsModule, 
+    IonSelect, 
+    IonSelectOption, 
+    IonLabel, 
+    IonMenu,
+    IonList,
+    IonItem,
+    IonImg,
+    RouterLink,
+    IonButtons,
+    IonMenuButton
+  ]
 })
 export class MainPage implements OnInit {
   form: FormGroup;
