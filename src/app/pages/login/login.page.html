@@ -2,14 +2,23 @@
   <div class="logoSpace">
     <ion-img src="../../../assets/img/logo.png"></ion-img>
   </div>
-  <ion-item-group class="loginInput">
-    <ion-item class="inputTop">
-      <ion-input label="Email" label-placement="floating" fill="solid" class="inputField"></ion-input>
-    </ion-item>
-    <ion-item class="inputBot">
-      <ion-input label="Contraseña" label-placement="floating" fill="solid" class="inputField"></ion-input>
-    </ion-item>
-  </ion-item-group>
+  
+  <div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit" [disabled]="!loginForm.valid">Login</ion-button>
+      <ion-text color="danger" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </ion-text>
+    </form>
+  </div>
   <div class="buttonGroup">
     <ion-button
       class="botonesLogin"

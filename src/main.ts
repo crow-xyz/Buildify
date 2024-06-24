@@ -7,6 +7,7 @@ import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
+import '@jeepq/core/loader';
 
 if (environment.production) {
   enableProdMode();
@@ -18,5 +19,6 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)), provideAnimationsAsync(),
     provideHttpClient(),
+    
   ],
 });
