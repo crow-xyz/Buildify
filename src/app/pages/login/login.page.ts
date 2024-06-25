@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Form, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonInput, IonButton, IonItemGroup, IonImg, IonLabel, IonText } from '@ionic/angular/standalone';
 import { DatabaseService, User } from 'src/app/services/database.service';
+import { AlertController } from '@ionic/angular';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-login',
@@ -32,9 +34,17 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
   errorMessage: string = '';
 
-  constructor(private databaseService: DatabaseService, private router: Router) { }
+  constructor(
+    private databaseService: DatabaseService, 
+    private router: Router,
+    private alertController: AlertController
+  ) { }
 
   ngOnInit() {
+    this.loginForm = new FormGroup({
+      email: new FormControl(''),
+      password: new FormControl('')
+    });
   }
 
   async login() {
@@ -43,11 +53,13 @@ export class LoginPage implements OnInit {
       const users: User[] = await this.databaseService.getUsers();
       const user = users.find(u => u.email === formValue.email && u.password === formValue.password);
       if (user) {
-        // Login successful
         console.log('Login successful', user);
-        // Redirect to another page or show success message
+        await Preferences.set({ 
+          key: 'isLoggedIn',
+          value: 'true',
+        });
+        this.router.navigateByUrl('/home');
       } else {
-        // Login failed
         this.errorMessage = 'Invalid email or password';
       }
     } catch (error) {
@@ -55,5 +67,4 @@ export class LoginPage implements OnInit {
       this.errorMessage = 'An error occurred during login. Please try again.';
     }
   }
-
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonMenu, IonList, IonItem, IonImg, IonButtons, IonMenuButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonLabel, IonMenu, IonList, IonItem, IonImg, IonButtons, IonMenuButton, IonButton } from '@ionic/angular/standalone';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HardwareService } from '../../services/hardware.service';
 import { RouterLink } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-main',
@@ -12,22 +13,23 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./main.page.scss'],
   standalone: true,
   imports: [
-    IonContent, 
-    IonHeader, 
-    IonTitle, 
-    IonToolbar, 
-    CommonModule, 
-    FormsModule, 
-    IonSelect, 
-    IonSelectOption, 
-    IonLabel, 
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+    CommonModule,
+    FormsModule,
+    IonSelect,
+    IonSelectOption,
+    IonLabel,
     IonMenu,
     IonList,
     IonItem,
     IonImg,
     RouterLink,
     IonButtons,
-    IonMenuButton
+    IonMenuButton,
+    IonButton
   ]
 })
 export class MainPage implements OnInit {
@@ -66,12 +68,17 @@ export class MainPage implements OnInit {
       gpu: new FormGroup({
         brand: new FormControl(null, { validators: [Validators.required] }),
         model: new FormControl(null, { validators: [Validators.required] }),
-        length: new FormControl(null, { validators: [Validators.required]}) 
+        length: new FormControl(null, { validators: [Validators.required] })
       }),
       motherboard: new FormGroup({
         brand: new FormControl(null, { validators: [Validators.required] }),
         model: new FormControl(null, { validators: [Validators.required] }),
         socket: new FormControl(null, { validators: [Validators.required] })
+      }),
+      ram: new FormGroup({
+        brand: new FormControl(null, { validators: [Validators.required] }),
+        model: new FormControl(null, { validators: [Validators.required] }),
+        type: new FormControl(null, { validators: [Validators.required] })
       }),
       case: new FormGroup({
         brand: new FormControl(null, { validators: [Validators.required] }),
@@ -79,31 +86,7 @@ export class MainPage implements OnInit {
         maxGpuLength: new FormControl(null, { validators: [Validators.required] }) // Assuming 'maxGpuLength' is a relevant property for cases
       }),
     });
-    // this.form.valueChanges.subscribe(values => {
-    //   this.checkCompatibility(values);
-    // });
   }
-
-  // checkCompatibility(values: any) {
-  //   const cpu = values.cpu;
-  //   const motherboard = values.motherboard;
-  //   const gpu = values.gpu;
-  //   const ram = values.ram;
-  //   const storage = values.storage;
-  //   const psu = values.psu;
-  //   const caseHardware = values.case;
-  //   const cooler = values.cooler;
-
-  //   // Chequea si ambos campos de CPU y Motherboard estan completos
-  //   if (cpu.socket && motherboard.socket) {
-  //     // Chequea si el socket del CPU es compatible con el socket de la motherboard
-  //     if (this.isCompatible = cpu.socket === motherboard.socket) {
-  //       console.log('CPU and Motherboard are compatible.');
-  //     } else {
-  //       console.log('CPU and Motherboard are not compatible.');
-  //     }
-  //   }
-  // }
 
   // Extrae datos de hardware de la API mediante servicio
   fetchHardwareData() {
@@ -157,14 +140,8 @@ export class MainPage implements OnInit {
       socket: selectedCpu.socket
     });
     this.selectedCpuSocket = selectedCpu.socket;
-    // this.filterMotherboards();
     this.filterHardware('cpu', selectedCpu);
   }
-
-  // Filtra las motherboards por socket de CPU seleccionado
-  // filterMotherboards() {
-  //   this.filteredMotherboardData = this.motherboardData.filter(motherboard => motherboard.socket === this.selectedCpuSocket);
-  // }
 
   onMotherboardSelect(event: any) {
     const selectedMotherboard = event.detail.value;
@@ -172,14 +149,19 @@ export class MainPage implements OnInit {
   }
 
   onRamSelect(event: any) {
-    this.form.get('ram').setValue(event.detail.value);
+    const selectedRam = event.detail.value;
+    this.form.get('ram').setValue({
+      brand: selectedRam.brand,
+      model: selectedRam.model,
+      type: selectedRam.type
+    });
   }
 
   onGpuSelect(event: any) {
     const selectedGpu = event.detail.value;
     this.filterHardware('gpu', selectedGpu);
   }
-  
+
   onCaseSelect(event: any) {
     const selectedCase = event.detail.value;
     this.form.get('case').setValue({
@@ -191,6 +173,17 @@ export class MainPage implements OnInit {
 
   onStorageSelect(event: any) {
     this.form.get('storage').setValue(event.detail.value);
-  }  
+  }
+
+  async saveBuild() {
+    const buildData = this.form.value;
+
+    await Preferences.set({
+      key: 'savedBuild',
+      value: JSON.stringify(buildData),
+    });
+
+    console.log('Build saved successfully!');
+  }
 
 }

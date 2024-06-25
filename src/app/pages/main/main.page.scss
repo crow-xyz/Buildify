@@ -14,6 +14,7 @@ p {
 
 .title {
   background: rgb(15, 23, 72);
+  color: white;
 }
 
 .headerWrapper {
@@ -21,6 +22,10 @@ p {
   justify-content: space-between;
   align-items: center;
   padding: 0 3% 0 3%;
+}
+
+.whiteText {
+  color: white;
 }
 
 .mainWrapper {

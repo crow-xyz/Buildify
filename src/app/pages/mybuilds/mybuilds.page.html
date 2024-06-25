@@ -22,37 +22,28 @@
         <div class="backArrow">
           <ion-img
             src="../../../assets/img/arrow-back-circle-outline.svg"
-            [routerLink]="['/login']"
+            [routerLink]="['/home']"
           ></ion-img>
         </div>
         <ion-title class="title">Hola, Usuario!</ion-title>
       </div>
       <ion-buttons slot="end">
-        <ion-menu-button></ion-menu-button>
+        <ion-menu-button class="whiteText"></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
     <div class="mainWrapper">
-      <div class="subtitleWrapper">
-        <ion-label class="whiteText"><h6>Bienvenido, selecciona una opción</h6></ion-label>
-      </div>
-      <p class="whiteText">Quieres...</p>
-      <div class="itemsWrapper">
-        <ion-item class="item">
-          <ion-button [routerLink]="['/main']">
-            <ion-card-header>Crear nueva Build</ion-card-header>
-          </ion-button>
-        </ion-item>
-      </div>
-      <p class="whiteText">o...</p>
-      <div class="itemsWrapper">
-        <ion-item>
-          <ion-button [routerLink]="['/mybuilds']">
-            <ion-card-header>Ver mis Builds</ion-card-header>
-          </ion-button>
-        </ion-item>
-      </div>
+      <ion-label><p>Tus builds guardadas:</p></ion-label>
+      <ion-item class="item">
+        <div *ngIf="savedBuild">
+          <h2>Saved Build</h2>
+          <p>CPU: {{ savedBuild.cpu.brand }} {{ savedBuild.cpu.model }}</p>
+          <p>GPU: {{ savedBuild.gpu.brand }} {{ savedBuild.gpu.model }}</p>
+          <p>RAM: {{ savedBuild.ram.brand }} {{ savedBuild.ram.model }} {{ savedBuild.ram.capacity }}GB</p>
+          <p>Motherboard: {{ savedBuild.motherboard.brand }} {{ savedBuild.motherboard.model }}</p>
+        </div>
+      </ion-item>
     </div>
   </ion-content>
 </div>

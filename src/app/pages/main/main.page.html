@@ -28,7 +28,7 @@
         <ion-title class="title">Hola, Usuario!</ion-title>
       </div>
       <ion-buttons slot="end">
-        <ion-menu-button></ion-menu-button>
+        <ion-menu-button class="whiteText"></ion-menu-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -48,7 +48,7 @@
       </div>
       <br>
       <div *ngIf="ramData">
-        <ion-select fill="outline" interface="popover" [(ngModel)]="selectedRam" placeholder="Selecciona RAM">
+        <ion-select fill="outline" interface="popover" (ionChange)="onRamSelect($event)" [(ngModel)]="selectedRam" placeholder="Selecciona RAM">
           <ion-select-option *ngFor="let ram of filteredRamData" [value]="ram">{{ ram.brand }} {{ ram.model }} {{ ram.capacity }}GB</ion-select-option>
         </ion-select>
       </div>
@@ -64,6 +64,8 @@
           <ion-select-option *ngFor="let caseItem of filteredCaseData" [value]="caseItem">{{ caseItem.brand }} {{ caseItem.model }}</ion-select-option>
         </ion-select>
       </div>
+      <br>
+      <ion-button (click)="saveBuild()">Save build</ion-button>
     </div>
   </ion-content>
 </div>
