@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonButton, IonMenuButton, IonButtons, IonImg, IonList, IonMenu } from '@ionic/angular/standalone';
 import { DatabaseService, User } from 'src/app/services/database.service';
-import { Router } from '@angular/router'; // Import Router for navigation
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonLabel, IonButton, ReactiveFormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonItem, IonLabel, IonButton, ReactiveFormsModule, IonMenuButton, IonButtons, IonImg, RouterLink, IonList, IonMenu]
 })
 export class RegisterPage implements OnInit {
   registrationForm: FormGroup; 

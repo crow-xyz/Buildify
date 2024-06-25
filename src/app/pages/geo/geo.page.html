@@ -22,10 +22,10 @@
         <div class="backArrow">
           <ion-img
             src="../../../assets/img/arrow-back-circle-outline.svg"
-            [routerLink]="['/login']"
+            [routerLink]="['/home']"
           ></ion-img>
         </div>
-        <ion-title class="title">Registro</ion-title>
+        <ion-title class="title">Geolocalizacion</ion-title>
       </div>
       <ion-buttons slot="end">
         <ion-menu-button class="whiteText"></ion-menu-button>
@@ -34,18 +34,11 @@
   </ion-header>
   <ion-content class="ion-padding">
     <div class="mainWrapper">
-      <ion-label><p>Ingresa tus datos:</p></ion-label>
-      <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input formControlName="email" type="email" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Password</ion-label>
-          <ion-input formControlName="password" type="password" ngDefaultControl></ion-input>
-        </ion-item>
-        <ion-button expand="block" type="submit" [disabled]="!registrationForm?.valid">Register</ion-button>
-      </form>
+      <div>
+        <p>Latitud: {{ latitude }}</p>
+        <p>Longitud: {{ longitude }}</p>
+      </div>
     </div>
   </ion-content>
 </div>
+
