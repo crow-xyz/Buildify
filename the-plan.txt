@@ -1,0 +1,13 @@
+Implementar
+
+- seguridad API django
+- cases (fetch + filtro)
+- cooler (fetch + filtro)
+- calculadora tdp
+- calculadora precio
+- filtrar psu por tdp (suma)
+- agregar opción de AMD / Intel en "Crear nueva build"
+- logout
+- optimizar main page (fetch -> async)
+- limpiar codigo
+- comentar codigo
