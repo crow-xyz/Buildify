@@ -5,31 +5,25 @@
 
   <div class="login-container">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input formControlName="email" type="email"></ion-input>
+      <ion-item class="loginInputTop">
+        <ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">Password</ion-label>
-        <ion-input formControlName="password" type="password"></ion-input>
+      <ion-item class="loginInputBot">
+        <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
       </ion-item>
-      <ion-button expand="block" type="submit" [disabled]="!loginForm.valid"
-        >Login</ion-button
+      <ion-button
+        class="button"
+        color="light"
+        expand="block"
+        type="submit"
+        [disabled]="!loginForm.valid"
+        >Ingresar</ion-button
       >
+      <br>
       <ion-text color="danger" *ngIf="errorMessage">
         <p>{{ errorMessage }}</p>
       </ion-text>
     </form>
-  </div>
-  <div class="buttonGroup">
-    <ion-button
-      class="botonesLogin"
-      color="rgb(208, 106, 16)"
-      [routerLink]="['/home']"
-      >Ingresar</ion-button
-    >
-    <ion-button class="botonesLogin" [routerLink]="['/register']"
-      >Registrarse</ion-button
-    >
+    <ion-button class="button" color="light" expand="block" [routerLink]="['/register']">Registrarse</ion-button>
   </div>
 </ion-content>
