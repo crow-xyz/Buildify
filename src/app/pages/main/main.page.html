@@ -35,31 +35,31 @@
   <ion-content class="ion-padding">
     <div class="mainWrapper">
       <ion-label><p>Selecciona tus componentes:</p></ion-label>
-      <div *ngIf="cpuData">
-        <ion-select fill="outline" interface="popover" (ionChange)="onCpuSelect($event)" placeholder="Selecciona CPU">
+      <div>
+        <ion-select fill="outline" interface="popover" (click)="fetchCpuData()" (ionChange)="onCpuSelect($event)" placeholder="Selecciona CPU">
           <ion-select-option *ngFor="let item of cpuData" [value]="item">{{ item.brand +" "+ item.model }}</ion-select-option>
         </ion-select>
       </div>
       <br>
-      <div *ngIf="motherboardData">
+      <div>
         <ion-select fill="outline" interface="popover" (ionChange)="onMotherboardSelect($event)" placeholder="Selecciona Placa madre">
           <ion-select-option *ngFor="let item of filteredMotherboardData" [value]="item">{{ item.brand +" "+ item.model }}</ion-select-option>
         </ion-select>
       </div>
       <br>
-      <div *ngIf="ramData">
+      <div>
         <ion-select fill="outline" interface="popover" (ionChange)="onRamSelect($event)" [(ngModel)]="selectedRam" placeholder="Selecciona RAM">
           <ion-select-option *ngFor="let ram of filteredRamData" [value]="ram">{{ ram.brand }} {{ ram.model }} {{ ram.capacity }}GB</ion-select-option>
         </ion-select>
       </div>
       <br>
-      <div *ngIf="gpuData">
-        <ion-select fill="outline" interface="popover" (ionChange)="onGpuSelect($event)" placeholder="Selecciona Tarjeta gráfica">
+      <div>
+        <ion-select fill="outline" interface="popover" (click)="fetchGpuData()" (ionChange)="onGpuSelect($event)" placeholder="Selecciona Tarjeta gráfica">
           <ion-select-option *ngFor="let gpu of gpuData" [value]="gpu">{{ gpu.brand }} {{ gpu.model }}</ion-select-option>
         </ion-select>
       </div>
       <br>
-      <div *ngIf="caseData">
+      <div>
         <ion-select fill="outline" interface="popover" [(ngModel)]="selectedCase" (ionChange)="onCaseSelect($event)" placeholder="Selecciona Case">
           <ion-select-option *ngFor="let caseItem of filteredCaseData" [value]="caseItem">{{ caseItem.brand }} {{ caseItem.model }}</ion-select-option>
         </ion-select>

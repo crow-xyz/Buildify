@@ -6,7 +6,6 @@ Implementar
 - calculadora tdp
 - calculadora precio
 - filtrar psu por tdp (suma)
-- agregar opción de AMD / Intel en "Crear nueva build"
 - logout
 - optimizar main page (fetch -> async)
 - limpiar codigo
